@@ -22,8 +22,8 @@ var todo = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 
 function writeJumbo() {
 
-    var jumbop1 = $("<p>").attr({ id: "jumbop" }).addClass("lead text-center").text("");
-    var jumbohtag = $("<h1>").attr({ id: "jumboh1" }).addClass("display-4 text-center").text("Day Planner");
+    var jumbop1 = $("<p>").attr({ id: "jumbop" }).addClass("lead text-center").text("3 ways to save - tab or click somewhere else, hit return or click the disk icon...");
+    var jumbohtag = $("<h1>").attr({ id: "jumboh1" }).addClass("display-4 text-center").text("Damm Tech Day Planner");
     var jumbohtag2 = $("<h2>").attr({ id: "jumboh12" }).addClass("display-4 text-center ").text(currdate);
     var jumboContainer = $("<div>").attr({ id: "jumboContainer" }).addClass("container");
     jumboContainer.append(jumbohtag, jumbohtag2, jumbop1);
