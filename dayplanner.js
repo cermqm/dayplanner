@@ -1,4 +1,4 @@
-var test = false;
+var test = true;
 
 // function currentday() {
 
@@ -15,7 +15,7 @@ if (test) console.log(h);
 currdate = '' + (d <= 9 ? '0' + d : d) + '-' + m + '-' + y;
 if (test) console.log(currdate);
 
-var todo = ["", "", "", "", "", "", "", "", ""];
+var todo = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 
 
 // }
@@ -24,7 +24,7 @@ function writeJumbo() {
 
     var jumbop1 = $("<p>").attr({ id: "jumbop" }).addClass("lead text-center").text("");
     var jumbohtag = $("<h1>").attr({ id: "jumboh1" }).addClass("display-4 text-center").text("Day Planner");
-    var jumbohtag2 = $("<h1>").attr({ id: "jumboh12" }).addClass("display-4 text-center ").text(currdate);
+    var jumbohtag2 = $("<h2>").attr({ id: "jumboh12" }).addClass("display-4 text-center ").text(currdate);
     var jumboContainer = $("<div>").attr({ id: "jumboContainer" }).addClass("container");
     jumboContainer.append(jumbohtag, jumbohtag2, jumbop1);
     var jumbo1 = $("<div>").attr({ id: "jumbo1" }).addClass("jumbotron jumbotron-fluid");
@@ -45,7 +45,7 @@ function writePage() {
         var inputid = ("input" + i);
         if (test) console.log("i = " + i);
         if (test) console.log("todo[i] = " + todo[i]);
-        var plannerInput = $("<input>").attr({ id: inputid, value: todo[i], float: "left", size: "40" }).addClass("border border-secondary rounded-lg input");
+        var plannerInput = $("<input>").attr({ id: inputid, value: todo[i], v: i, float: "left", size: "40" }).addClass("border border-secondary rounded-lg input");
         // Adding save button
         var plannerSave = $("<button>").attr({ id: "save" + i, value: i }).addClass("border border-secondary rounded-lg button fa fa-floppy-o bg-secondary");
         // Creating a div container for these 3 items...
@@ -115,4 +115,25 @@ $(".button").on("click", function() {
     if (test) console.log("button clicked - value - " + this.value)
     if (test) console.log("valueofbtn = " + valueofbtn);
     saveRow(valueofbtn);
+});
+
+// listener for focus off of input
+$(".input").on("focusout", function() {
+    // if (test) alert("button clicked");
+    var inputID = this.id;
+    var valueofinput = inputID.substring(5);
+    if (test) console.log("inputID = " + inputID);
+    if (test) console.log("valueofinput = " + valueofinput);
+    saveRow(valueofinput);
+});
+
+// listener for return keydown
+$('.input').on('keydown', function(e) {
+    if (test) console.log("in return listener");
+    var key = e.which;
+    if (key == 13) {
+        alert("enter");
+        $('#button').click();
+        return false;
+    }
 });
