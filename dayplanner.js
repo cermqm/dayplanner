@@ -1,4 +1,4 @@
-var test = true;
+var test = false;
 
 // function currentday() {
 
@@ -27,30 +27,32 @@ function writeJumbo() {
     var jumbohtag2 = $("<h1>").attr({ id: "jumboh12" }).addClass("display-4 text-center ").text(currdate);
     var jumboContainer = $("<div>").attr({ id: "jumboContainer" }).addClass("container");
     jumboContainer.append(jumbohtag, jumbohtag2, jumbop1);
-    var jumbo1 = $("<div>").attr({ id: "jumbo1" }).addClass("jumbotron jumbotron-fluid border border-primary rounded-lg bg-primary");
+    var jumbo1 = $("<div>").attr({ id: "jumbo1" }).addClass("jumbotron jumbotron-fluid");
     jumbo1.append(jumboContainer);
     $("#jumbodiv").append(jumbo1);
 
 }
 
 function writePage() {
-    var businessHours = ["0900", "1000", "1100", "1200", "1300", "1400", "1500", "1600", "1700"];
+    // var businessHours = ["0900", "1000", "1100", "1200", "1300", "1400", "1500", "1600", "1700"];
+    var businessHours = ["0900", "0930", "1000", "1030", "1100", "1130", "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530", "1600", "1630", "1700"];
 
     for (let i = 0; i < businessHours.length; i++) {
         if (test) console.log("in for loop");
         // Adding work day times
-        var plannerTimes = $("<a>").text(businessHours[i]).attr({ id: "hours" + i, float: "left" }).addClass("border border-secondary rounded-lg hours");
+        var plannerTimes = $("<a>").text(businessHours[i]).attr({ id: "hours" + i, float: "left" }).addClass("border border-secondary rounded-lg hours bg-secondary text-light");
         // Adding input box
         var inputid = ("input" + i);
         if (test) console.log("i = " + i);
         if (test) console.log("todo[i] = " + todo[i]);
         var plannerInput = $("<input>").attr({ id: inputid, value: todo[i], float: "left", size: "40" }).addClass("border border-secondary rounded-lg input");
         // Adding save button
-        var plannerSave = $("<button>").attr({ id: "save" + i, value: i }).addClass("border border-secondary rounded-lg button fa fa-floppy-o");
+        var plannerSave = $("<button>").attr({ id: "save" + i, value: i }).addClass("border border-secondary rounded-lg button fa fa-floppy-o bg-secondary");
         // Creating a div container for these 3 items...
         var container = $("<div>").attr({ id: "container" + i, style: "font-size: 2vw" });
         container.append(plannerTimes, plannerInput, plannerSave);
         $("#startdiv").append(container);
+        $(".bg").css("background-image", "url('techbackground.jpg')");
         updateRowColor(businessHours[i], inputid);
     }
 
