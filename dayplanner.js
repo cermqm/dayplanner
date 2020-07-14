@@ -1,4 +1,4 @@
-var test = true;
+var test = false;
 
 // function currentday() {
 
@@ -86,7 +86,7 @@ function saveRow(index) {
 function updateRowColor() {
 
     console.log("h = " + h);
-    var h2 = (h + 10);
+    var h2 = (h);
     for (let i = 0; i < businessHours.length; i++) {
         var inputid = ("input" + i);
 
