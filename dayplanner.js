@@ -1,4 +1,4 @@
-var test = true;
+var test = false;
 
 // function currentday() {
 
@@ -132,7 +132,7 @@ $('.input').on('keydown', function(e) {
     if (test) console.log("in return listener");
     var key = e.which;
     if (key == 13) {
-        alert("enter");
+        if (texting) alert("enter");
         $('#button').click();
         return false;
     }
