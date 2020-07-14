@@ -79,7 +79,6 @@ function saveRow(index) {
     if (test) console.log("todo array = " + todo);
     localStorage.setItem("todos-" + currdate, JSON.stringify(todo));
     updateRowColor();
-
 }
 
 // function to update row color based on time of day
@@ -89,7 +88,7 @@ function updateRowColor() {
     var h2 = (h);
     for (let i = 0; i < businessHours.length; i++) {
         var inputid = ("input" + i);
-
+        if (test) console.log("in update row color");
         if (test) console.log("rowColor ", h2, businessHours[i], inputid);
         var time2 = String(h2) + "00";
         if (test) console.log("time2 = " + time2);
