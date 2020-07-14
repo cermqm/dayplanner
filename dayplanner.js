@@ -1,4 +1,4 @@
-var test = false;
+var test = true;
 
 // function currentday() {
 
@@ -23,7 +23,7 @@ var todo = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 function writeJumbo() {
 
     var jumbop1 = $("<p>").attr({ id: "jumbop" }).addClass("lead text-center").text("3 ways to save - tab or click somewhere else, hit return or click the disk icon...");
-    var jumbohtag = $("<h1>").attr({ id: "jumboh1" }).addClass("display-4 text-center").text("Damm Tech Day Planner");
+    var jumbohtag = $("<h1>").attr({ id: "jumboh1" }).addClass("display-4 text-center").text("Day Planner");
     var jumbohtag2 = $("<h2>").attr({ id: "jumboh12" }).addClass("display-4 text-center ").text(currdate);
     var jumboContainer = $("<div>").attr({ id: "jumboContainer" }).addClass("container");
     jumboContainer.append(jumbohtag, jumbohtag2, jumbop1);
@@ -129,11 +129,13 @@ $(".input").on("focusout", function() {
 
 // listener for return keydown
 $('.input').on('keydown', function(e) {
-    if (test) console.log("in return listener");
     var key = e.which;
     if (key == 13) {
-        if (texting) alert("enter");
+        if (test) console.log("in return listener - key 13");
+        var inputID = this.id;
+        var valueofinput = inputID.substring(5);
         $('#button').click();
+        saveRow(valueofinput);
         return false;
     }
 });
