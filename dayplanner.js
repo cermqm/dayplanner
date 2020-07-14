@@ -1,4 +1,4 @@
-var test = false;
+var test = true;
 
 // function currentday() {
 
@@ -11,18 +11,19 @@ var y = tdate.getFullYear();
 var h = tdate.getHours();
 // var m = tdate.getMinutes();
 
-if (test) console.log(h);
+if (test) console.log("h = " + h);
 currdate = '' + (d <= 9 ? '0' + d : d) + '-' + m + '-' + y;
 if (test) console.log(currdate);
 
 var todo = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+var businessHours = ["0900", "0930", "1000", "1030", "1100", "1130", "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530", "1600", "1630", "1700"];
 
 
 // }
-
+// Jumbtron to display title, date and instructions...
 function writeJumbo() {
 
-    var jumbop1 = $("<p>").attr({ id: "jumbop" }).addClass("lead text-center").text("3 ways to save - tab or click somewhere else, hit return or click the disk icon...");
+    var jumbop1 = $("<p>").attr({ id: "jumbop" }).addClass("lead text-center").text("Save - tab or click somewhere else, hit return or click the disk icon...");
     var jumbohtag = $("<h1>").attr({ id: "jumboh1" }).addClass("display-4 text-center").text("Day Planner");
     var jumbohtag2 = $("<h2>").attr({ id: "jumboh12" }).addClass("display-4 text-center ").text(currdate);
     var jumboContainer = $("<div>").attr({ id: "jumboContainer" }).addClass("container");
@@ -33,9 +34,8 @@ function writeJumbo() {
 
 }
 
+// function to write hours, input box and save icon
 function writePage() {
-    // var businessHours = ["0900", "1000", "1100", "1200", "1300", "1400", "1500", "1600", "1700"];
-    var businessHours = ["0900", "0930", "1000", "1030", "1100", "1130", "1200", "1230", "1300", "1330", "1400", "1430", "1500", "1530", "1600", "1630", "1700"];
 
     for (let i = 0; i < businessHours.length; i++) {
         if (test) console.log("in for loop");
@@ -53,12 +53,13 @@ function writePage() {
         container.append(plannerTimes, plannerInput, plannerSave);
         $("#startdiv").append(container);
         $(".bg").css("background-image", "url('techbackground.jpg')");
-        updateRowColor(businessHours[i], inputid);
+        // updateRowColor(businessHours[i], inputid);
+        updateRowColor();
     }
 
 }
 
-// init function to pull highscores if there are any and put into highScorearray...
+// init function to pull todo's if there are any and put into todo...
 function init(parameter) {
     if (test) console.log("todo array in init = " + todo)
     var todosaved = JSON.parse(localStorage.getItem("todos-" + currdate));
@@ -68,6 +69,7 @@ function init(parameter) {
     }
 }
 
+// function to save todo to local storage...
 function saveRow(index) {
     var inputText = $("#input" + index).val();
     if (test) console.log("inputText = " + inputText);
@@ -76,30 +78,36 @@ function saveRow(index) {
     todo.splice(index, 1, inputText);
     if (test) console.log("todo array = " + todo);
     localStorage.setItem("todos-" + currdate, JSON.stringify(todo));
+    updateRowColor();
 
 }
 
-// function to update row color
-function updateRowColor(hour, inputid) {
+// function to update row color based on time of day
+function updateRowColor() {
 
-    if (test) console.log("rowColor ", h, hour, inputid);
+    console.log("h = " + h);
+    var h2 = (h + 10);
+    for (let i = 0; i < businessHours.length; i++) {
+        var inputid = ("input" + i);
 
-    var time2 = String(h) + "00";
-    if (test) console.log("time2 = " + time2);
+        if (test) console.log("rowColor ", h2, businessHours[i], inputid);
+        var time2 = String(h2) + "00";
+        if (test) console.log("time2 = " + time2);
+        if (businessHours[i] < time2) {
+            // update inputid.css('')
+            if (test) { console.log("lessThan"); }
+            $(`#${inputid}`).css("background-color", "lightgrey").attr({ disabled: "true" });
+        } else if (businessHours[i] > time2) {
+            if (test) console.log("greaterthan");
+            $(`#${inputid}`).css("background-color", "lightgreen")
+        } else {
+            if (test) console.log("equal");
+            $(`#${inputid}`).css("background-color", "tomato")
+        }
+    };
+}
 
-    if (hour < time2) {
-        // update inputid.css('')
-        if (test) { console.log("lessThan"); }
-        $(`#${inputid}`).css("background-color", "lightgrey");
-        //add disabled attribut on element
-    } else if (hour > time2) {
-        if (test) console.log("greaterthan");
-        $(`#${inputid}`).css("background-color", "lightgreen")
-    } else {
-        if (test) console.log("equal");
-        $(`#${inputid}`).css("background-color", "tomato")
-    }
-};
+
 
 init();
 writeJumbo();
